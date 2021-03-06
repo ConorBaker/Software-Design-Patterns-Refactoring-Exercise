@@ -818,7 +818,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			newFile = fc.getSelectedFile();
 			// if old file wasn't saved and its name is generated file name,
 			// delete this file
-			if (file.getName().equals(generatedFileName))
+			if (checkFileName())
 				file.delete();// delete file
 			file = newFile;// assign opened file to file
 			// open file for reading
@@ -833,7 +833,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	private void saveFile() {
 		// if file name is generated file name, save file as 'save as' else save
 		// changes to file
-		if (file.getName().equals(generatedFileName))
+		if (checkFileName())
 			saveFileAs();// save file as 'save as'
 		else {
 			// if changes has been made to text field offer user to save these
@@ -910,7 +910,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			try {// try to copy old file to new file
 				Files.copy(file.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				// if old file name was generated file name, delete it
-				if (file.getName().equals(generatedFileName))
+				if (checkFileName())
 					file.delete();// delete file
 				file = newFile;// assign new file to file
 			} // end try
@@ -951,10 +951,17 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	}// end exitApp
 	
 	private void deleteGenerateFile(File file, String generatedFileName) {
-		if (file.getName().equals(generatedFileName))
+		if (checkFileName())
 			file.delete();// delete file
 		System.exit(0);
-
+	}
+	
+	private boolean checkFileName() {
+		if (file.getName().equals(generatedFileName)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	// generate 20 character long file name
