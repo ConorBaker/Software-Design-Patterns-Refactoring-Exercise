@@ -268,8 +268,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		cancelChange.setToolTipText("Cancel edit");
 
 		empDetails.add(buttonPanel, "span 2,growx, pushx,wrap");
-		loopPanelComps(empDetails);
 		// loop through panel components and add listeners and format
+		loopPanelComps(empDetails);
 		 // end for
 		return empDetails;
 	}// end detailsPanel
@@ -316,37 +316,41 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		if (thisEmployee == null) {
 		} else if (thisEmployee.getEmployeeId() == 0) {
 		} else {
+			findComboBox(found,countGender, countDep, thisEmployee);
 			// find corresponding gender combo box value to current employee
-			while (!found && countGender < gender.length - 1) {
-				if (Character.toString(thisEmployee.getGender()).equalsIgnoreCase(gender[countGender]))
-					found = true;
-				else
-					countGender++;
-			} // end while
-			found = false;
-			// find corresponding department combo box value to current employee
-			while (!found && countDep < department.length - 1) {
-				if (thisEmployee.getDepartment().trim().equalsIgnoreCase(department[countDep]))
-					found = true;
-				else
-					countDep++;
-			} // end while
-			idField.setText(Integer.toString(thisEmployee.getEmployeeId()));
-			ppsField.setText(thisEmployee.getPps().trim());
-			surnameField.setText(thisEmployee.getSurname().trim());
-			firstNameField.setText(thisEmployee.getFirstName());
-			genderCombo.setSelectedIndex(countGender);
-			departmentCombo.setSelectedIndex(countDep);
-			salaryField.setText(format.format(thisEmployee.getSalary()));
-			// set corresponding full time combo box value to current employee
-			if (thisEmployee.getFullTime() == true)
-				fullTimeCombo.setSelectedIndex(1);
-			else
-				fullTimeCombo.setSelectedIndex(2);
+			 // end while
 		}
 		change = false;
 	}// end display records
 
+	public void findComboBox(boolean found, int countGender, int countDep, Employee thisEmployee) {
+		while (!found && countGender < gender.length - 1) {
+			if (Character.toString(thisEmployee.getGender()).equalsIgnoreCase(gender[countGender]))
+				found = true;
+			else
+				countGender++;
+		} // end while
+		found = false;
+		// find corresponding department combo box value to current employee
+		while (!found && countDep < department.length - 1) {
+			if (thisEmployee.getDepartment().trim().equalsIgnoreCase(department[countDep]))
+				found = true;
+			else
+				countDep++;
+		}
+		idField.setText(Integer.toString(thisEmployee.getEmployeeId()));
+		ppsField.setText(thisEmployee.getPps().trim());
+		surnameField.setText(thisEmployee.getSurname().trim());
+		firstNameField.setText(thisEmployee.getFirstName());
+		genderCombo.setSelectedIndex(countGender);
+		departmentCombo.setSelectedIndex(countDep);
+		salaryField.setText(format.format(thisEmployee.getSalary()));
+		// set corresponding full time combo box value to current employee
+		if (thisEmployee.getFullTime() == true)
+			fullTimeCombo.setSelectedIndex(1);
+		else
+			fullTimeCombo.setSelectedIndex(2);
+	}
 	// display Employee summary dialog
 	private void displayEmployeeSummaryDialog() {
 		// display Employee summary dialog if these is someone to display
