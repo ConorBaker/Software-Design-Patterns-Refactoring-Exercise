@@ -85,6 +85,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	String[] department = { "", "Administration", "Production", "Transport", "Management" };
 	// full time combo box values
 	String[] fullTime = { "", "Yes", "No" };
+	
 	Color red = new Color(255, 150, 150);
 
 	// initialize menu bar
@@ -228,7 +229,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	private JPanel detailsPanel() {
 		JPanel empDetails = new JPanel(new MigLayout());
 		JPanel buttonPanel = new JPanel();
-		JTextField field;
+	
 
 		empDetails.setBorder(BorderFactory.createTitledBorder("Employee Details"));
 
@@ -267,34 +268,40 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		cancelChange.setToolTipText("Cancel edit");
 
 		empDetails.add(buttonPanel, "span 2,growx, pushx,wrap");
-
+		loopPanelComps(empDetails);
 		// loop through panel components and add listeners and format
-		for (int i = 0; i < empDetails.getComponentCount(); i++) {
-			empDetails.getComponent(i).setFont(font1);
-			if (empDetails.getComponent(i) instanceof JTextField) {
-				field = (JTextField) empDetails.getComponent(i);
-				field.setEditable(false);
-				if (field == ppsField)
-					field.setDocument(new JTextFieldLimit(9));
-				else
-					field.setDocument(new JTextFieldLimit(20));
-				field.getDocument().addDocumentListener(this);
-			} // end if
-			else if (empDetails.getComponent(i) instanceof JComboBox) {
-				empDetails.getComponent(i).setBackground(Color.WHITE);
-				empDetails.getComponent(i).setEnabled(false);
-				((JComboBox<String>) empDetails.getComponent(i)).addItemListener(this);
-				((JComboBox<String>) empDetails.getComponent(i)).setRenderer(new DefaultListCellRenderer() {
-					// set foregroung to combo boxes
-					public void paint(Graphics g) {
-						setForeground(new Color(65, 65, 65));
-						super.paint(g);
-					}// end paint
-				});
-			} // end else if
-		} // end for
+		 // end for
 		return empDetails;
 	}// end detailsPanel
+	
+	public void loopPanelComps(JPanel empDetails) {
+		JTextField field;
+		// loop through panel components and add listeners and format
+				for (int i = 0; i < empDetails.getComponentCount(); i++) {
+					empDetails.getComponent(i).setFont(font1);
+					if (empDetails.getComponent(i) instanceof JTextField) {
+						field = (JTextField) empDetails.getComponent(i);
+						field.setEditable(false);
+						if (field == ppsField)
+							field.setDocument(new JTextFieldLimit(9));
+						else
+							field.setDocument(new JTextFieldLimit(20));
+						field.getDocument().addDocumentListener(this);
+					} // end if
+					else if (empDetails.getComponent(i) instanceof JComboBox) {
+						empDetails.getComponent(i).setBackground(Color.WHITE);
+						empDetails.getComponent(i).setEnabled(false);
+						((JComboBox<String>) empDetails.getComponent(i)).addItemListener(this);
+						((JComboBox<String>) empDetails.getComponent(i)).setRenderer(new DefaultListCellRenderer() {
+							// set foregroung to combo boxes
+							public void paint(Graphics g) {
+								setForeground(new Color(65, 65, 65));
+								super.paint(g);
+							}// end paint
+						});
+					} // end else if
+				}
+	}
 
 	// display current Employee details
 	public void displayRecords(Employee thisEmployee) {
