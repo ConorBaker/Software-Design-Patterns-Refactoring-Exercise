@@ -939,7 +939,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				// if user chooses to save file, save file
 				if (returnVal == JOptionPane.YES_OPTION) {
 					saveFile();// save file
-				} 
+				}
 			}
 		}
 		// delete generated file if user chooses not to save file
