@@ -855,14 +855,14 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 				// save changes if user choose this option
 				if (returnVal == JOptionPane.YES_OPTION && !idField.getText().equals("")) {
-						application.openWriteFile(file.getAbsolutePath());
-						// get changes for current Employee
-						currentEmployee = getChangedDetails();
-						// write changes to file for corresponding Employee
-						// record
-						application.changeRecords(currentEmployee, currentByteStart);
-						application.closeWriteFile();// close file for writing
-				
+					application.openWriteFile(file.getAbsolutePath());
+					// get changes for current Employee
+					currentEmployee = getChangedDetails();
+					// write changes to file for corresponding Employee
+					// record
+					application.changeRecords(currentEmployee, currentByteStart);
+					application.closeWriteFile();// close file for writing
+
 				} // end if
 			} // end if
 
@@ -939,24 +939,12 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				// if user chooses to save file, save file
 				if (returnVal == JOptionPane.YES_OPTION) {
 					saveFile();// save file
-					// delete generated file if user saved details to other file
-					deleteGenerateFile(file, generatedFileName);// exit application
-				} // end if
-					// else exit application
-				else if (returnVal == JOptionPane.NO_OPTION) {
-					// delete generated file if user chooses not to save file
-					deleteGenerateFile(file, generatedFileName);
-				} // end else if
-			} // end if
-			else {
-				// delete generated file if user chooses not to save file
-				deleteGenerateFile(file, generatedFileName);// exit application
-			} // end else
-				// else exit application
-		} else {
-			// delete generated file if user chooses not to save file
-			deleteGenerateFile(file, generatedFileName);// exit application
-		} // end else
+				} 
+			}
+		}
+		// delete generated file if user chooses not to save file
+		deleteGenerateFile(file, generatedFileName);// exit application
+		// end else
 	}// end exitApp
 
 	private void deleteGenerateFile(File file, String generatedFileName) {
@@ -1002,48 +990,48 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			if (e.getSource() == closeApp) {
 				exitApp();
 			} else if (e.getSource() == open) {
-					openFile();
+				openFile();
 			} else if (e.getSource() == save) {
-					saveFile();
+				saveFile();
 				change = false;
 			} else if (e.getSource() == saveAs) {
-					saveFileAs();
+				saveFileAs();
 				change = false;
 			} else if (e.getSource() == searchById) {
-					displaySearchByIdDialog();
+				displaySearchByIdDialog();
 			} else if (e.getSource() == searchBySurname) {
-					displaySearchBySurnameDialog();
+				displaySearchBySurnameDialog();
 			} else if (e.getSource() == searchId || e.getSource() == searchByIdField)
 				searchEmployeeById();
 			else if (e.getSource() == searchSurname || e.getSource() == searchBySurnameField)
 				searchEmployeeBySurname();
 			else if (e.getSource() == saveChange) {
-				
+
 			} else if (e.getSource() == cancelChange)
 				cancelChange();
 			else if (e.getSource() == firstItem || e.getSource() == first) {
-					firstRecord();
-					displayRecords(currentEmployee);
+				firstRecord();
+				displayRecords(currentEmployee);
 			} else if (e.getSource() == prevItem || e.getSource() == previous) {
-					previousRecord();
-					displayRecords(currentEmployee);
+				previousRecord();
+				displayRecords(currentEmployee);
 			} else if (e.getSource() == nextItem || e.getSource() == next) {
-					nextRecord();
-					displayRecords(currentEmployee);
+				nextRecord();
+				displayRecords(currentEmployee);
 			} else if (e.getSource() == lastItem || e.getSource() == last) {
-					lastRecord();
-					displayRecords(currentEmployee);
+				lastRecord();
+				displayRecords(currentEmployee);
 			} else if (e.getSource() == listAll || e.getSource() == displayAll) {
-					if (isSomeoneToDisplay())
-						displayEmployeeSummaryDialog();
+				if (isSomeoneToDisplay())
+					displayEmployeeSummaryDialog();
 			} else if (e.getSource() == create || e.getSource() == add) {
-					new AddRecordDialog(EmployeeDetails.this);
+				new AddRecordDialog(EmployeeDetails.this);
 			} else if (e.getSource() == modify || e.getSource() == edit) {
-					editDetails();
+				editDetails();
 			} else if (e.getSource() == delete || e.getSource() == deleteButton) {
-					deleteRecord();
+				deleteRecord();
 			} else if (e.getSource() == searchBySurname) {
-					new SearchBySurnameDialog(EmployeeDetails.this);
+				new SearchBySurnameDialog(EmployeeDetails.this);
 			}
 		}
 	}// end actionPerformed
